@@ -1,29 +1,34 @@
 package com.alquiteto.junior.controller;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "Books", description = "Endpoints for book operations")
+import java.util.List;
+import java.util.Random;
+
 @RestController
-@RequestMapping("/books")
+@RequestMapping("/random")
 @Validated
 public class DaleController {
+    Long i = 0L;
 
-    @Operation(summary = "Get book info", description = "Get book info by id", tags = {"Books"})
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successful operation",
-                    content = @Content(schema = @Schema(implementation = String.class))),
-            @ApiResponse(responseCode = "400", description = "Book with given id does not exist.", content = @Content)
-    })
-    public ResponseEntity<String> dale() {
-        return ResponseEntity.ok("piza, cuida, dale");
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<String> custom() {
+        var statusList = List.of(HttpStatus.values());
+
+        Random random = new Random();
+        int index = random.nextInt(statusList.size());
+        HttpStatus randomStatus = statusList.get(index);
+        i = i + 1L;
+        if (i == 7) {
+            i = 0L;
+            return ResponseEntity.status(HttpStatus.OK).body("Status Aleatório:" + HttpStatus.OK);
+        }
+
+        return ResponseEntity.status(randomStatus).body("Status Aleatório:" + randomStatus);
     }
 }

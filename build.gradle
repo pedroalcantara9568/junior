@@ -18,9 +18,11 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui
-    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.5'
+    implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+implementation('org.springframework.boot:spring-boot-devtools')
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
+    implementation 'org.springframework.boot:spring-boot-starter-parent:2.4.0'
 }
 
 tasks.named('test') {
