@@ -31,7 +31,7 @@ public class DaleController {
         int index = random.nextInt(statusList.size());
         HttpStatus randomStatus = statusList.get(index);
         i = i + 1L;
-        if (i == 7) {
+        if (i == 3) {
             i = 0L;
             logger.info("deu ruim :" +HttpStatus.OK);
             return ResponseEntity.status(HttpStatus.OK).body("Status Aleatório:" + HttpStatus.OK);
