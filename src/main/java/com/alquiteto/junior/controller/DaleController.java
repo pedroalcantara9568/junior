@@ -24,7 +24,7 @@ public class DaleController {
     Long i = 0L;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<String> custom() throws InterruptedException {
+    public ResponseEntity<String> custom() {
         var statusList = List.of(HttpStatus.values());
         logger.info("dale");
         Random random = new Random();
