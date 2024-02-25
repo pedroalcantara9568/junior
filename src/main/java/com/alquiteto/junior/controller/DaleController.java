@@ -26,16 +26,17 @@ public class DaleController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<String> custom() {
         var statusList = List.of(HttpStatus.values());
-        logger.info("dale");
+
         Random random = new Random();
         int index = random.nextInt(statusList.size());
         HttpStatus randomStatus = statusList.get(index);
         i = i + 1L;
         if (i == 7) {
             i = 0L;
+            logger.info("deu ruim :" +HttpStatus.OK);
             return ResponseEntity.status(HttpStatus.OK).body("Status Aleatório:" + HttpStatus.OK);
         }
-
+        logger.info("deu ruim :" +randomStatus);
         return ResponseEntity.status(randomStatus).body("Status Aleatório:" + randomStatus);
     }
 }
