@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Random;
-
 @RestController
 @RequestMapping("/random")
 @Validated
@@ -24,19 +21,15 @@ public class DaleController {
     Long i = 0L;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<String> custom() {
-        var statusList = List.of(HttpStatus.values());
-
-        Random random = new Random();
-        int index = random.nextInt(statusList.size());
-        HttpStatus randomStatus = statusList.get(index);
+    public ResponseEntity<String> random() throws InterruptedException {
         i = i + 1L;
-        if (i == 3) {
+        if (i.equals(3L)) {
             i = 0L;
-            logger.info("deu ruim :" +HttpStatus.OK);
+            Thread.sleep(1000);
+            logger.info("deu bom :" + HttpStatus.OK);
             return ResponseEntity.status(HttpStatus.OK).body("Status Aleatório:" + HttpStatus.OK);
         }
-        logger.info("deu ruim :" +randomStatus);
-        return ResponseEntity.status(randomStatus).body("Status Aleatório:" + randomStatus);
+        logger.info("deu ruim :" + HttpStatus.UNPROCESSABLE_ENTITY);
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Status Aleatório:" + HttpStatus.UNPROCESSABLE_ENTITY);
     }
 }
